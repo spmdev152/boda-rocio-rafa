@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wedding-beige: #F5F5DC;
+  --color-wedding-gold: #D4AF37;
+  --color-wedding-dark: #333333;
+  --color-wedding-sage: #9DC183;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-wedding-dark);
+    background-color: #FAFAFA;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
