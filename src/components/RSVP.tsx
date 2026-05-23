@@ -9,6 +9,8 @@ const RSVP = () => {
     conAcompanante: false,
     nombreAcompanante: "",
     apellidosAcompanante: "",
+    usaAutobus: false,
+    tipoAutobus: "ida-vuelta",
     alergias: "",
     cancion: "",
   });
@@ -37,11 +39,27 @@ const RSVP = () => {
       "Apellidos acompañante",
       formData.conAcompanante ? formData.apellidosAcompanante : "",
     );
+    dataToSend.append(
+      "Autobuses",
+      formData.asistencia === "yes"
+        ? formData.usaAutobus
+          ? "Sí"
+          : "No"
+        : "",
+    );
+    dataToSend.append(
+      "Tipo autobús",
+      formData.asistencia === "yes" && formData.usaAutobus
+        ? formData.tipoAutobus === "ida-vuelta"
+          ? "Ida y vuelta"
+          : "Solo vuelta"
+        : "",
+    );
 
     try {
       // Sustituye esta URL por la URL de tu Web App de Google Apps Script
       const GOOGLE_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbxd02o_PiIJwmgZlfkOcyZ60bzde_ib7DV8xBdotBZEL9aMaYQ7gfGvL9DM0-oH6kb-6w/exec";
+        "https://script.google.com/macros/s/AKfycbzBZggXF2eUfyeUHTI8MMY-URWo8K7PvAwcRfc_d5BgNiT6486nTNnwQfUTqmQFE39KJA/exec";
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -59,6 +77,8 @@ const RSVP = () => {
           conAcompanante: false,
           nombreAcompanante: "",
           apellidosAcompanante: "",
+          usaAutobus: false,
+          tipoAutobus: "ida-vuelta",
           alergias: "",
           cancion: "",
         });
@@ -89,6 +109,8 @@ const RSVP = () => {
         conAcompanante: false,
         nombreAcompanante: "",
         apellidosAcompanante: "",
+        usaAutobus: false,
+        tipoAutobus: "ida-vuelta",
       });
       return;
     }
@@ -99,6 +121,15 @@ const RSVP = () => {
         conAcompanante: false,
         nombreAcompanante: "",
         apellidosAcompanante: "",
+      });
+      return;
+    }
+
+    if (name === "usaAutobus" && !checked) {
+      setFormData({
+        ...formData,
+        usaAutobus: false,
+        tipoAutobus: "ida-vuelta",
       });
       return;
     }
@@ -292,6 +323,60 @@ const RSVP = () => {
                           className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-gold/50 transition-all font-light"
                           placeholder="Apellidos del acompañante"
                         />
+                      </div>
+                    </motion.div>
+                  )}
+
+                  <div>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="usaAutobus"
+                        checked={formData.usaAutobus}
+                        onChange={handleChange}
+                        className="w-4 h-4 rounded border-stone-300 text-wedding-gold focus:ring-wedding-gold/50"
+                      />
+                      <span className="text-sm font-light text-wedding-dark/80">
+                        Utilizaré el servicio de autobuses
+                      </span>
+                    </label>
+                  </div>
+
+                  {formData.usaAutobus && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                    >
+                      <label className="block text-sm font-medium text-wedding-dark/80 mb-2 uppercase tracking-wider text-xs">
+                        Tipo de trayecto
+                      </label>
+                      <div className="flex gap-4">
+                        <label className="flex-1 cursor-pointer relative">
+                          <input
+                            type="radio"
+                            name="tipoAutobus"
+                            value="ida-vuelta"
+                            checked={formData.tipoAutobus === "ida-vuelta"}
+                            onChange={handleChange}
+                            className="peer sr-only"
+                          />
+                          <div className="text-center px-4 py-3 border border-stone-200 rounded-lg peer-checked:border-wedding-gold peer-checked:bg-wedding-gold/5 peer-checked:text-wedding-dark text-stone-400 font-light transition-all">
+                            Ida y vuelta
+                          </div>
+                        </label>
+                        <label className="flex-1 cursor-pointer relative">
+                          <input
+                            type="radio"
+                            name="tipoAutobus"
+                            value="solo-vuelta"
+                            checked={formData.tipoAutobus === "solo-vuelta"}
+                            onChange={handleChange}
+                            className="peer sr-only"
+                          />
+                          <div className="text-center px-4 py-3 border border-stone-200 rounded-lg peer-checked:border-wedding-gold peer-checked:bg-wedding-gold/5 peer-checked:text-wedding-dark text-stone-400 font-light transition-all">
+                            Solo vuelta
+                          </div>
+                        </label>
                       </div>
                     </motion.div>
                   )}
