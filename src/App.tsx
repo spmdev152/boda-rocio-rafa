@@ -6,21 +6,9 @@ import Info from "./components/Info";
 import Registry from "./components/Registry";
 import RSVP from "./components/RSVP";
 import Footer from "./components/Footer";
-import Login from "./components/Login";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [showToast, setShowToast] = useState(false);
-
-  useEffect(() => {
-    // Check if user is already authenticated in this session
-    const auth = sessionStorage.getItem("wedding_auth");
-    if (auth === "true") {
-      setIsAuthenticated(true);
-    }
-    setIsLoading(false);
-  }, []);
 
   // Easter Egg listener
   useEffect(() => {
@@ -45,11 +33,6 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleLogin = () => {
-    sessionStorage.setItem("wedding_auth", "true");
-    setIsAuthenticated(true);
-  };
-
   const easterEggToast = (
     <AnimatePresence>
       {showToast && (
@@ -70,17 +53,6 @@ function App() {
       )}
     </AnimatePresence>
   );
-
-  if (isLoading) return null;
-
-  if (!isAuthenticated) {
-    return (
-      <>
-        <Login onLogin={handleLogin} />
-        {easterEggToast}
-      </>
-    );
-  }
 
   return (
     <>

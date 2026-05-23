@@ -30,7 +30,7 @@ const Info = () => {
             </div>
             <h3 className="font-serif text-2xl text-center text-wedding-dark mb-6">Autobuses</h3>
             <p className="text-center text-wedding-dark/70 font-light mb-8 leading-relaxed">
-              Para vuestra comodidad, pondremos a disposición un servicio de autobuses que os llevará desde el centro de Madrid hasta la finca, y de vuelta al finalizar la fiesta.
+              Para vuestra comodidad, pondremos a vuestra disposición un servicio de autobuses que os llevará desde el centro de Madrid hasta la finca y de vuelta al finalizar la fiesta.
             </p>
             
             <div className="space-y-4">
@@ -38,7 +38,7 @@ const Info = () => {
                 <Map className="flex-shrink-0 text-wedding-sage mt-1" size={20} />
                 <div>
                   <h4 className="font-medium text-wedding-dark">Punto de salida (Madrid)</h4>
-                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Plaza de Cánovas del Castillo (Neptuno) - Confirmaremos horario exacto más adelante.</p>
+                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Confirmaremos punto de salida exacto más adelante.</p>
                 </div>
               </div>
               <div className="w-full h-px bg-stone-200 my-2"></div>
@@ -46,7 +46,7 @@ const Info = () => {
                 <Clock className="flex-shrink-0 text-wedding-sage mt-1" size={20} />
                 <div>
                   <h4 className="font-medium text-wedding-dark">Horarios de vuelta</h4>
-                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Habrá diferentes horarios de regreso durante la noche para que podáis volver cuando queráis.</p>
+                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Confirmaremos horario exacto más adelante.</p>
                 </div>
               </div>
             </div>

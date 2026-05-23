@@ -9,7 +9,7 @@ const Itinerary = () => {
       location: "Iglesia de las Calatravas",
       address: "C. Alcalá, 25, Centro, 28014 Madrid, España",
       description:
-        "Nos daremos el 'sí, quiero' rodeados de nuestros seres más queridos.",
+        "Queremos compartir la alegría de este día con las personas que mas queremos.",
       mapUrl: "https://maps.app.goo.gl/g6z9MvC4A9DYZC2f9", // Note: Fake maps url for now, just an example format
     },
     {

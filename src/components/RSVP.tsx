@@ -6,6 +6,9 @@ const RSVP = () => {
     nombre: "",
     apellidos: "",
     asistencia: "yes",
+    conAcompanante: false,
+    nombreAcompanante: "",
+    apellidosAcompanante: "",
     alergias: "",
     cancion: "",
   });
@@ -26,11 +29,19 @@ const RSVP = () => {
     );
     dataToSend.append("Alergias o intolerancias", formData.alergias);
     dataToSend.append("Cancion", formData.cancion);
+    dataToSend.append(
+      "Nombre acompañante",
+      formData.conAcompanante ? formData.nombreAcompanante : "",
+    );
+    dataToSend.append(
+      "Apellidos acompañante",
+      formData.conAcompanante ? formData.apellidosAcompanante : "",
+    );
 
     try {
       // Sustituye esta URL por la URL de tu Web App de Google Apps Script
       const GOOGLE_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbzb3ZH9ptasGta7jv2e6gjd2S6q7MR4mKf73r8GUQinuzE4NAa25-oEj8XIWOBKnp1beA/exec";
+        "https://script.google.com/macros/s/AKfycbxd02o_PiIJwmgZlfkOcyZ60bzde_ib7DV8xBdotBZEL9aMaYQ7gfGvL9DM0-oH6kb-6w/exec";
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -45,6 +56,9 @@ const RSVP = () => {
           nombre: "",
           apellidos: "",
           asistencia: "yes",
+          conAcompanante: false,
+          nombreAcompanante: "",
+          apellidosAcompanante: "",
           alergias: "",
           cancion: "",
         });
@@ -64,9 +78,34 @@ const RSVP = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
+    const { name, value, type } = e.target;
+    const checked =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+
+    if (name === "asistencia" && value === "no") {
+      setFormData({
+        ...formData,
+        asistencia: value,
+        conAcompanante: false,
+        nombreAcompanante: "",
+        apellidosAcompanante: "",
+      });
+      return;
+    }
+
+    if (name === "conAcompanante" && !checked) {
+      setFormData({
+        ...formData,
+        conAcompanante: false,
+        nombreAcompanante: "",
+        apellidosAcompanante: "",
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -95,7 +134,7 @@ const RSVP = () => {
           </h2>
           <div className="w-12 h-px bg-white/50 mx-auto mb-6"></div>
           <p className="font-light tracking-wide text-white/80">
-            Por favor, confírmanos tu asistencia antes del [Fecha Límite].
+            Por favor, confírmanos tu asistencia lo antes posible.
           </p>
         </motion.div>
 
@@ -197,6 +236,66 @@ const RSVP = () => {
                   exit={{ opacity: 0, height: 0 }}
                   className="space-y-6"
                 >
+                  <div>
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="conAcompanante"
+                        checked={formData.conAcompanante}
+                        onChange={handleChange}
+                        className="w-4 h-4 rounded border-stone-300 text-wedding-gold focus:ring-wedding-gold/50"
+                      />
+                      <span className="text-sm font-light text-wedding-dark/80">
+                        Vengo con acompañante
+                      </span>
+                    </label>
+                  </div>
+
+                  {formData.conAcompanante && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                    >
+                      <div>
+                        <label
+                          htmlFor="nombreAcompanante"
+                          className="block text-sm font-medium text-wedding-dark/80 mb-2 uppercase tracking-wider text-xs"
+                        >
+                          Nombre del acompañante
+                        </label>
+                        <input
+                          type="text"
+                          id="nombreAcompanante"
+                          name="nombreAcompanante"
+                          required
+                          value={formData.nombreAcompanante}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-gold/50 transition-all font-light"
+                          placeholder="Nombre del acompañante"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="apellidosAcompanante"
+                          className="block text-sm font-medium text-wedding-dark/80 mb-2 uppercase tracking-wider text-xs"
+                        >
+                          Apellidos del acompañante
+                        </label>
+                        <input
+                          type="text"
+                          id="apellidosAcompanante"
+                          name="apellidosAcompanante"
+                          required
+                          value={formData.apellidosAcompanante}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-gold/50 transition-all font-light"
+                          placeholder="Apellidos del acompañante"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+
                   <div>
                     <label
                       htmlFor="alergias"
