@@ -7,13 +7,13 @@ const funds = [
     id: "luna",
     title: "Fondo luna de miel",
     description:
-      "Aportación para nuestro viaje de novios a Japón y Tailandia a través del siguiente número de cuenta",
+      "Aportación para nuestro viaje de novios a Japón y Tailandia a través del siguiente número de cuenta:",
   },
   {
     id: "hogar",
     title: "Fondo hogar",
     description:
-      "Aportación para nuestra nueva casa en la que empezaremos nuestra vida juntos a través del siguiente número de cuenta:",
+      "Aportación para nuestra nueva casa, en la que empezaremos nuestra vida juntos, a través del siguiente número de cuenta:",
   },
 ];
 

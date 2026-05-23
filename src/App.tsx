@@ -6,25 +6,33 @@ import Info from "./components/Info";
 import Registry from "./components/Registry";
 import RSVP from "./components/RSVP";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showToast, setShowToast] = useState(false);
 
-  // Easter Egg listener
+  useEffect(() => {
+    const auth = sessionStorage.getItem("wedding_auth");
+    if (auth === "true") {
+      setIsAuthenticated(true);
+    }
+    setIsLoading(false);
+  }, []);
+
   useEffect(() => {
     let keysTyped = "";
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Avoid capturing single character typings when inside input fields
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
         return;
       }
-      
+
       const key = e.key.toLowerCase();
       keysTyped = (keysTyped + key).slice(-4);
-      
+
       if (keysTyped === "peña") {
         setShowToast(true);
-        // Hide toast after 5 seconds
         setTimeout(() => setShowToast(false), 5000);
       }
     };
@@ -32,6 +40,11 @@ function App() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  const handleLogin = () => {
+    sessionStorage.setItem("wedding_auth", "true");
+    setIsAuthenticated(true);
+  };
 
   const easterEggToast = (
     <AnimatePresence>
@@ -53,6 +66,17 @@ function App() {
       )}
     </AnimatePresence>
   );
+
+  if (isLoading) return null;
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Login onLogin={handleLogin} />
+        {easterEggToast}
+      </>
+    );
+  }
 
   return (
     <>
