@@ -8,21 +8,21 @@ const funds = [
     title: "Fondo luna de miel",
     description:
       "Aportación para nuestro viaje de novios a Japón y Tailandia a través del siguiente número de cuenta:",
+    accountNumber: "ES24 0182 5322 2800 0355 5534",
   },
   {
     id: "hogar",
     title: "Fondo hogar",
     description:
       "Aportación para nuestra nueva casa, en la que empezaremos nuestra vida juntos, a través del siguiente número de cuenta:",
+    accountNumber: "ES93 0081 5378 2100 0148 0357",
   },
 ];
 
 const Registry = () => {
   const [copiedFund, setCopiedFund] = useState<string | null>(null);
 
-  const accountNumber = "ES24 0182 5322 2800 0355 5534";
-
-  const handleCopy = (fundId: string) => {
+  const handleCopy = (fundId: string, accountNumber: string) => {
     navigator.clipboard.writeText(accountNumber.replace(/\s/g, ""));
     setCopiedFund(fundId);
     setTimeout(() => setCopiedFund(null), 2000);
@@ -70,11 +70,11 @@ const Registry = () => {
               </p>
 
               <div className="bg-stone-50 p-4 rounded-lg w-full mb-4 font-mono text-sm tracking-wider text-wedding-dark border border-stone-200">
-                {accountNumber}
+                {fund.accountNumber}
               </div>
 
               <button
-                onClick={() => handleCopy(fund.id)}
+                onClick={() => handleCopy(fund.id, fund.accountNumber)}
                 className="mt-auto px-6 py-2.5 rounded-full border border-wedding-dark text-wedding-dark hover:bg-wedding-dark hover:text-white transition-colors duration-300 flex items-center gap-2 text-sm uppercase tracking-widest font-medium"
               >
                 {copiedFund === fund.id ? (
