@@ -19,6 +19,11 @@ const funds = [
   },
 ];
 
+const accountHolders = [
+  "Rafael María Prado Garcia",
+  "María del Rocio Sancho Beltrán",
+];
+
 const Registry = () => {
   const [copiedFund, setCopiedFund] = useState<string | null>(null);
 
@@ -88,6 +93,24 @@ const Registry = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-10 max-w-lg mx-auto text-center bg-white px-8 py-6 rounded-2xl border border-stone-200 shadow-sm"
+        >
+          <p className="text-xs uppercase tracking-widest text-wedding-dark/50 mb-3">
+            Titulares
+          </p>
+          <p className="text-sm text-wedding-dark/80 font-light leading-relaxed">
+            {accountHolders.join(" · ")}
+          </p>
+          <p className="text-xs text-wedding-dark/50 font-light mt-3">
+            Válidos para cualquiera de las dos cuentas
+          </p>
+        </motion.div>
       </div>
     </section>
   );
