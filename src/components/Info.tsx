@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Bus, Map, Clock } from 'lucide-react';
+import { Bus, Map, Clock, ExternalLink } from 'lucide-react';
 
 const Info = () => {
   return (
@@ -30,23 +30,36 @@ const Info = () => {
             </div>
             <h3 className="font-serif text-2xl text-center text-wedding-dark mb-6">Autobuses</h3>
             <p className="text-center text-wedding-dark/70 font-light mb-8 leading-relaxed">
-              Para vuestra comodidad, pondremos a vuestra disposición un servicio de autobuses que os llevará desde el centro de Madrid hasta la finca y de vuelta al finalizar la fiesta.
+              Para vuestra comodidad, pondremos a vuestra disposición un servicio de autobuses que os llevará desde la iglesia hasta la finca y de vuelta a Madrid al finalizar la fiesta.
             </p>
-            
+
             <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <Map className="flex-shrink-0 text-wedding-sage mt-1" size={20} />
                 <div>
-                  <h4 className="font-medium text-wedding-dark">Punto de salida (Madrid)</h4>
-                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Confirmaremos punto de salida exacto más adelante.</p>
+                  <h4 className="font-medium text-wedding-dark">Ida</h4>
+                  <p className="text-sm text-wedding-dark/60 font-light mt-1 leading-relaxed">
+                    Al terminar la ceremonia, desde la Iglesia de las Calatravas.
+                  </p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Iglesia+de+las+Calatravas%2C+C.+Alcal%C3%A1%2C+25%2C+28014+Madrid"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-wedding-gold hover:text-wedding-dark transition-colors mt-1 break-words"
+                  >
+                    C. Alcalá, 25, Centro, 28014 Madrid
+                    <ExternalLink size={14} className="flex-shrink-0" />
+                  </a>
                 </div>
               </div>
               <div className="w-full h-px bg-stone-200 my-2"></div>
               <div className="flex items-start gap-4">
                 <Clock className="flex-shrink-0 text-wedding-sage mt-1" size={20} />
                 <div>
-                  <h4 className="font-medium text-wedding-dark">Horarios de vuelta</h4>
-                  <p className="text-sm text-wedding-dark/60 font-light mt-1">Confirmaremos horario exacto más adelante.</p>
+                  <h4 className="font-medium text-wedding-dark">Vuelta</h4>
+                  <p className="text-sm text-wedding-dark/60 font-light mt-1 leading-relaxed">
+                    A las 00:45 desde Finca El Gasco, con destino Nuevos Ministerios y Moncloa.
+                  </p>
                 </div>
               </div>
             </div>
